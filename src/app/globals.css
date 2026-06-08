@@ -746,6 +746,39 @@ header p {
   background: transparent;
   line-height: 25px;
   resize: none;
+}
+
+/* ==========================================
+   হাইড নেক্সট.জেএস ডেভ ইন্ডিকেটর
+   ========================================== */
+
+/* হাইড নেক্সট.জেএস ডেভেলপমেন্ট ইন্ডিকেটর ব্যাজ */
+[data-nextjs-toast-container] {
+  display: none !important;
+}
+
+/* হাইড ভেরসেল টুলবার এবং অন্যান্য ডেভ UI এলিমেন্ট */
+#__nextjs-dev-footer,
+#__next-dev-footer-container,
+.__next_dev_indicator {
+  display: none !important;
+}
+
+/* হাইড যেকোনো ডেভেলপমেন্ট ইন্ডিকেটর */
+[data-dev-indicator],
+.dev-indicator,
+[role="alert"][class*="dev"],
+[class*="dev-indicator"],
+[class*="build-activity"] {
+  display: none !important;
+}
+
+/* নিশ্চিত করুন যে ডেভ টুলস ভিজিবল নয় */
+body > [class*="dev"],
+body > [id*="dev"],
+body > [data-dev] {
+  display: none !important;
+}
   font-family: 'Atma', cursive;
   font-size: 1.2rem;
   color: #5d1a1a;
