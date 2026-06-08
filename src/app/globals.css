@@ -752,31 +752,39 @@ header p {
    হাইড নেক্সট.জেএস ডেভ ইন্ডিকেটর
    ========================================== */
 
-/* হাইড নেক্সট.জেএস ডেভেলপমেন্ট ইন্ডিকেটর ব্যাজ */
-[data-nextjs-toast-container] {
-  display: none !important;
-}
-
-/* হাইড ভেরসেল টুলবার এবং অন্যান্য ডেভ UI এলিমেন্ট */
+/* সব ধরনের নেক্সট.জেএস ডেভ ইন্ডিকেটর হাইড করুন */
+[data-nextjs-toast-container],
 #__nextjs-dev-footer,
 #__next-dev-footer-container,
-.__next_dev_indicator {
-  display: none !important;
-}
-
-/* হাইড যেকোনো ডেভেলপমেন্ট ইন্ডিকেটর */
+.__next_dev_indicator,
 [data-dev-indicator],
 .dev-indicator,
 [role="alert"][class*="dev"],
 [class*="dev-indicator"],
-[class*="build-activity"] {
+[class*="build-activity"],
+[class*="nextjs-dev"],
+[id*="nextjs-dev"],
+[class*="__next"],
+div[style*="position: fixed"][style*="bottom"][style*="right"],
+svg[style*="position: fixed"],
+button[style*="position: fixed"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* বটম-রাইট এবং বটম-লেফট ফিক্সড এলিমেন্ট হাইড করুন (ডেভ টুলস) */
+body > div[style*="position"][style*="fixed"],
+body > svg[style*="position"][style*="fixed"],
+body > button[style*="position"][style*="fixed"] {
   display: none !important;
 }
 
-/* নিশ্চিত করুন যে ডেভ টুলস ভিজিবল নয় */
-body > [class*="dev"],
-body > [id*="dev"],
-body > [data-dev] {
+/* নেক্সট.জেএস আইফ্রেম হাইড করুন */
+iframe[style*="position: fixed"],
+iframe[class*="dev"],
+iframe[id*="dev"] {
   display: none !important;
 }
 
