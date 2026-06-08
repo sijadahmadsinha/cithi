@@ -1,0 +1,836 @@
+/* Google Fonts এবং FontAwesome ইমপোর্ট */
+@import url('https://fonts.googleapis.com/css2?family=Atma:wght@400;600&family=Galada&family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@300;400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* গ্লোবাল স্টাইল ও রিসেট */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #e6dac6;
+  background-image: 
+    radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0),
+    radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+  color: #2c2520;
+  font-family: 'Hind Siliguri', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* কন্টেইনার - ডায়েরি বাইন্ডার বা ডেস্ক লেআউট */
+.desk-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 30px auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* হেডার স্টাইল - রাজকীয় বা সুদৃশ্য বাংলা লোগো */
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+header h1 {
+  font-family: 'Galada', cursive;
+  font-size: 3.5rem;
+  color: #5d4037;
+  text-shadow: 1px 1px 0px #ffffff, 2px 2px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+  display: inline-block;
+  position: relative;
+}
+
+header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: radial-gradient(circle, #5d4037 30%, transparent 70%);
+}
+
+header p {
+  font-size: 1.1rem;
+  font-family: 'Noto Serif Bengali', serif;
+  color: #6d4c41;
+  font-style: italic;
+}
+
+/* ডায়েরি ট্যাব সিস্টেম */
+.diary-tabs {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 20px;
+  margin-bottom: -2px;
+  position: relative;
+  z-index: 5;
+}
+
+.diary-tab {
+  background-color: #ebdcb9;
+  border: 1px solid #c2b090;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 24px;
+  font-family: 'Noto Serif Bengali', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #6d4c41;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 5px;
+  box-shadow: inset 0 -3px 5px rgba(0,0,0,0.05);
+}
+
+.diary-tab:hover {
+  background-color: #f7ebd3;
+  color: #4e342e;
+}
+
+.diary-tab.active {
+  background-color: #fffefb;
+  color: #3e2723;
+  padding-top: 12px;
+  margin-top: -2px;
+  border-top: 3px solid #8d6e63;
+  box-shadow: none;
+  z-index: 6;
+}
+
+/* ডায়েরি পৃষ্ঠা */
+.diary-page {
+  background-color: #fffefb;
+  border: 1px solid #c2b090;
+  border-radius: 4px;
+  padding: 50px 40px 40px 70px; /* Red margin on the left */
+  box-shadow: 
+    0 1px 1px rgba(0,0,0,0.1),
+    0 10px 25px rgba(0,0,0,0.05),
+    0 20px 40px rgba(0,0,0,0.08),
+    2px 2px 0 #fffefb,
+    3px 3px 0 #c2b090,
+    5px 5px 0 #fffefb,
+    6px 6px 0 #c2b090;
+  position: relative;
+  min-height: 500px;
+  transition: transform 0.5s ease;
+}
+
+/* বাইন্ডার স্পাইরাল রিং */
+.diary-page::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 1px;
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 20px 0 0 rgba(0,0,0,0.08);
+}
+
+/* স্পাইরাল ছেদবিন্দুসমূহ */
+.spirals {
+  position: absolute;
+  left: 10px;
+  top: 40px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 80px);
+  z-index: 4;
+}
+
+.spiral-ring {
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid #a1887f;
+  border-radius: 50%;
+  background: transparent;
+  position: relative;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2), 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* ডায়েরির লাল মার্জিন লাইন */
+.diary-margin {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 55px;
+  width: 1.5px;
+  background-color: #d88e8e;
+}
+
+/* চিঠি রাইটিং ডেস্ক ফর্ম */
+.write-desk {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: 'Noto Serif Bengali', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #4e342e;
+}
+
+/* ইনপুট ফিল্ড ও টেক্সট এরিয়া */
+.ink-input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px dashed #bba993;
+  background: transparent;
+  outline: none;
+  padding: 10px 5px;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1.05rem;
+  color: #3e2723;
+  transition: all 0.3s ease;
+}
+
+.ink-input:focus {
+  border-bottom-color: #5d4037;
+  background-color: rgba(253, 246, 233, 0.4);
+}
+
+/* রুল টানা পৃষ্ঠা টেক্সট এরিয়া */
+.ruled-container {
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+}
+
+.ruled-textarea {
+  width: 100%;
+  height: 220px;
+  border: none;
+  outline: none;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 29px,
+    #ebd9c2 29px,
+    #ebd9c2 30px
+  );
+  line-height: 30px;
+  padding: 0 5px;
+  resize: none;
+  font-family: 'Atma', cursive;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a365d; /* নীল কালি */
+  transition: all 0.3s ease;
+  overflow-y: auto;
+}
+
+.ruled-textarea::placeholder {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #a18c7c;
+  opacity: 0.8;
+  line-height: 30px;
+}
+
+/* চিঠি প্রেরণের বাটন */
+.send-btn {
+  align-self: flex-end;
+  background-color: #8d6e63;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 30px;
+  font-family: 'Noto Serif Bengali', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #4e342e, 0px 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.send-btn:hover {
+  background-color: #795548;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #4e342e, 0px 6px 12px rgba(0,0,0,0.12);
+}
+
+.send-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #4e342e, 0px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* উত্তরপত্র সেকশন */
+.replies-feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* সার্চ বক্স */
+.search-box {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.search-box .ink-input {
+  flex-grow: 1;
+}
+
+/* চিঠি কার্ডের গ্রিড */
+.letters-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+/* চিঠি কার্ড */
+.letter-card {
+  background-color: #fffefb;
+  border: 1px solid #ebd9c2;
+  border-radius: 4px;
+  padding: 30px 25px 25px 40px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(93, 64, 55, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: visible;
+}
+
+.letter-card:nth-child(odd) {
+  transform: rotate(0.5deg);
+}
+.letter-card:nth-child(even) {
+  transform: rotate(-0.5deg);
+}
+
+.letter-card:hover {
+  transform: scale(1.01) rotate(0deg);
+  box-shadow: 0 8px 25px rgba(93, 64, 55, 0.15);
+}
+
+.letter-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 30px;
+  width: 1px;
+  background-color: #d88e8e;
+}
+
+/* টেপ ইফেক্ট */
+.tape-effect {
+  position: absolute;
+  top: -12px;
+  left: 35%;
+  width: 90px;
+  height: 24px;
+  background-color: rgba(215, 201, 169, 0.5);
+  transform: rotate(-2deg);
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.02);
+  border-left: 2px dashed rgba(0,0,0,0.06);
+  border-right: 2px dashed rgba(0,0,0,0.06);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.letter-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 0.9rem;
+  color: #8d6e63;
+  border-bottom: 1px double #ebd9c2;
+  padding-bottom: 6px;
+}
+
+.letter-sender {
+  font-weight: 700;
+  color: #5d4037;
+}
+
+.letter-subject {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #3e2723;
+  margin-bottom: 10px;
+}
+
+.letter-body {
+  font-family: 'Atma', cursive;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a365d;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+}
+
+/* উত্তর নোট */
+.reply-attachment {
+  background-color: #fcf8eb;
+  border: 1px dashed #d7c5a9;
+  border-radius: 2px;
+  padding: 20px;
+  margin-top: 15px;
+  position: relative;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.04);
+}
+
+.reply-tape {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  width: 70px;
+  height: 18px;
+  background-color: rgba(220, 160, 160, 0.4);
+  transform: rotate(3deg);
+  border-left: 1px dashed rgba(0,0,0,0.05);
+  border-right: 1px dashed rgba(0,0,0,0.05);
+}
+
+.reply-header {
+  font-family: 'Noto Serif Bengali', serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #a83232;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reply-body {
+  font-family: 'Atma', cursive;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #5d1a1a;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* লোডিং স্টেট */
+.loading-view {
+  text-align: center;
+  padding: 50px 0;
+  font-family: 'Noto Serif Bengali', serif;
+  color: #8d6e63;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #ebd9c2;
+  border-top-color: #8d6e63;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.empty-view {
+  text-align: center;
+  padding: 60px 0;
+  color: #a18c7c;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 1.1rem;
+}
+
+/* সাকসেস মডেল */
+.success-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(44, 37, 32, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.success-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.envelope-card {
+  background-color: #f7eedb;
+  border: 2px solid #5d4037;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 450px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  position: relative;
+  transform: translateY(-20px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.success-modal.active .envelope-card {
+  transform: translateY(0);
+}
+
+.wax-seal {
+  width: 60px;
+  height: 60px;
+  background-color: #a82e2e;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Galada', cursive;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.2);
+  border: 2px dashed #902222;
+}
+
+.envelope-card h3 {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 1.5rem;
+  color: #5d4037;
+  margin-bottom: 12px;
+}
+
+.envelope-card p {
+  font-size: 1.05rem;
+  color: #6d4c41;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.close-modal-btn {
+  background-color: #5d4037;
+  color: #fff;
+  border: none;
+  padding: 8px 25px;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.close-modal-btn:hover {
+  background-color: #3e2723;
+}
+
+/* ==========================================
+   অ্যাডমিন প্যানেল স্পেসিফিক স্টাইল (admin-cithi)
+   ========================================== */
+
+.lock-screen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  width: 100%;
+}
+
+.lock-card {
+  background-color: #fffefb;
+  border: 1px solid #c2b090;
+  border-radius: 8px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  text-align: center;
+  position: relative;
+}
+
+.lock-icon {
+  font-size: 3rem;
+  color: #8d6e63;
+  margin-bottom: 20px;
+}
+
+.lock-card h2 {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 1.6rem;
+  color: #5d4037;
+  margin-bottom: 10px;
+}
+
+.lock-card p {
+  font-size: 0.95rem;
+  color: #795548;
+  margin-bottom: 25px;
+}
+
+.lock-card button {
+  width: 100%;
+  background-color: #8d6e63;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-family: 'Noto Serif Bengali', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.2s;
+}
+
+.lock-card button:hover {
+  background-color: #795548;
+}
+
+.error-message {
+  color: #a82e2e;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  font-family: 'Hind Siliguri', sans-serif;
+  min-height: 20px;
+}
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+  border-bottom: 2px dashed #ebd9c2;
+  padding-bottom: 20px;
+}
+
+.stat-item {
+  background-color: #fffefb;
+  border: 1px solid #ebd9c2;
+  border-radius: 4px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.stat-val {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #5d4037;
+  font-family: 'Noto Serif Bengali', serif;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #8d6e63;
+}
+
+.admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  background-color: #ebdcb9;
+  border: 1px solid #c2b090;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 0.95rem;
+  color: #6d4c41;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+  background-color: #8d6e63;
+  color: white;
+  border-color: #8d6e63;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+  border-top: 1px dashed #ebd9c2;
+  padding-top: 12px;
+}
+
+.action-btn {
+  border: none;
+  border-radius: 4px;
+  padding: 6px 15px;
+  font-size: 0.9rem;
+  font-family: 'Noto Serif Bengali', serif;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.reply-btn {
+  background-color: #8d6e63;
+  color: white;
+}
+
+.reply-btn:hover {
+  background-color: #795548;
+}
+
+.delete-btn {
+  background-color: #f7e6e6;
+  color: #c53030;
+  border: 1px solid #f0a8a8;
+}
+
+.delete-btn:hover {
+  background-color: #c53030;
+  color: white;
+  border-color: #c53030;
+}
+
+.admin-reply-box {
+  margin-top: 15px;
+  background-color: #fdfaf2;
+  border: 1px solid #ebd9c2;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.admin-reply-box textarea {
+  width: 100%;
+  height: 100px;
+  border: none;
+  outline: none;
+  background: transparent;
+  line-height: 25px;
+  resize: none;
+  font-family: 'Atma', cursive;
+  font-size: 1.2rem;
+  color: #5d1a1a;
+  border-bottom: 2px dashed #ebd9c2;
+  margin-bottom: 12px;
+}
+
+.admin-reply-box textarea::placeholder {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.95rem;
+  color: #c2b090;
+}
+
+.reply-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+footer {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #8d6e63;
+  font-family: 'Noto Serif Bengali', serif;
+}
+
+footer a {
+  color: #5d4037;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* রেসপন্সিভ মিডিয়া কুয়েরি */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  
+  header h1 {
+    font-size: 2.6rem;
+  }
+  
+  .diary-page {
+    padding: 40px 15px 30px 45px;
+  }
+  
+  .diary-margin {
+    left: 35px;
+  }
+  
+  .diary-page::after {
+    left: 12px;
+    box-shadow: 14px 0 0 rgba(0,0,0,0.08);
+  }
+  
+  .spirals {
+    left: 4px;
+  }
+  
+  .spiral-ring {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .diary-tab {
+    padding: 8px 15px;
+    font-size: 0.95rem;
+  }
+
+  .letter-card {
+    padding: 25px 15px 20px 30px;
+  }
+  
+  .letter-card::before {
+    left: 20px;
+  }
+  
+  .send-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
