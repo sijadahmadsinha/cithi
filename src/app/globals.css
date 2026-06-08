@@ -779,12 +779,6 @@ body > [id*="dev"],
 body > [data-dev] {
   display: none !important;
 }
-  font-family: 'Atma', cursive;
-  font-size: 1.2rem;
-  color: #5d1a1a;
-  border-bottom: 2px dashed #ebd9c2;
-  margin-bottom: 12px;
-}
 
 .admin-reply-box textarea::placeholder {
   font-family: 'Hind Siliguri', sans-serif;
